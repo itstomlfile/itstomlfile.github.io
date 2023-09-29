@@ -18,6 +18,9 @@ jobs:
       with:
         node-version: '18.17.0'
 
+    - name: Set working directory
+      run: cd ./portfolio-frontend
+
     - name: Install Dependencies
       run: npm install
 
@@ -27,6 +30,6 @@ jobs:
     - name: Deploy to GitHub Pages
       run: |
         npm install gh-pages
-        npx gh-pages -d dist  # Change `dist` to `build` if using Create React App, Vite uses `dist` by default
+        npx gh-pages -d dist
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
