@@ -6,30 +6,24 @@ on:
       - develop
 
 jobs:
-  build-and-deploy:
+  build-and-deploy-frontend:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout Source Code
       uses: actions/checkout@v2
-
+      
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
         node-version: '18.17.0'
 
-    - name: Set working directory
-      run: cd ./portfolio-frontend
-
     - name: Install Dependencies
-      run: npm install
+      run: cd portfolio-frontend && npm install
 
     - name: Build React App
-      run: npm run build
+      run: cd portfolio-frontend && npm run build
 
     - name: Deploy to GitHub Pages
-      run: |
-        npm install gh-pages
-        npx gh-pages -d dist
+      run: cd portfolio-frontend && npm install gh-pages && npx gh-pages -d dist
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
