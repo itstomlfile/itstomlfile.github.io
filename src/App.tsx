@@ -1,6 +1,7 @@
 import { useForm, ValidationError } from '@formspree/react';
 import { SubmissionError } from '@formspree/core';
 import { useState, ChangeEvent } from 'react';
+import WorkQueueButton from './components/WQM';
 
 function ContactForm() {
   const FORMSPREE_ID: string | undefined = import.meta.env.VITE_FORMSPREE_ID || "mbjvpdkr";
@@ -76,12 +77,14 @@ function ContactForm() {
       </button>
     </form>
   );
+
 }
 
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex flex-col items-center justify-center space-y-4 bg-gray-100">
       <ContactForm />
+      <WorkQueueButton />
     </div>
   );
 }
