@@ -10,7 +10,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto p-5 flex justify-between items-center">
         <div className="text-xl font-bold">
           <NavLink to="/" className="hover:text-gray-400 transition ease-in-out duration-200">
-            Your Name
+            Tom Charlesworth
           </NavLink>
         </div>
         <nav>
