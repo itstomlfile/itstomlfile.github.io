@@ -44,7 +44,7 @@ const WorkQueueManagement: React.FC = () => {
   useEffect(() => {
     fetchEvents();
   }, []);
-  
+
   return (
     <div className="bg-gray-200 p-8 rounded-md shadow-md">
       <table className="min-w-full bg-white rounded-md shadow-md overflow-hidden">
@@ -69,7 +69,7 @@ const WorkQueueManagement: React.FC = () => {
                 />
               </td>
               <td className="py-2 px-4 text-center">{event.name}</td>
-              <td className="py-2 px-4 text-center">{event.locked ? 'Locked' : 'Unlocked'}</td>
+              <td className="py-2 px-4 text-center">{event.status ? 'Locked' : 'Unlocked'}</td>
             </tr>
           ))}
         </tbody>
