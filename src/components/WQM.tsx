@@ -3,7 +3,8 @@ import WorkQueueManagementService from '../services/WorkQueueManagementService';
 
 type Event = {
   id: string;
-  name: string;
+  name: string
+  timestamp: string;
   status: 'unlocked' | 'locked';
 };
 
@@ -51,6 +52,10 @@ const WorkQueueManagement: React.FC = () => {
     }
   };
 
+  const formatDate = (timestamp: string) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString(); // This will format the date based on the user's locale
+  };
 
   useEffect(() => {
     fetchEvents();
@@ -83,31 +88,33 @@ const WorkQueueManagement: React.FC = () => {
         </button>
       </div>
       <table className="min-w-full bg-white rounded-md shadow-md overflow-hidden">
-        <thead className="bg-gray-900 text-white">
-          <tr>
-            <th className="py-2 px-4 text-center">Select</th>
-            <th className="py-2 px-4 text-center">Event ID</th>
-            <th className="py-2 px-4 text-center">Status</th>
+      <thead className="bg-gray-900 text-white">
+        <tr>
+          <th className="py-2 px-4 text-center">Select</th>
+          <th className="py-2 px-4 text-center">Event ID</th>
+          <th className="py-2 px-4 text-center">Status</th>
+          <th className="py-2 px-4 text-center">Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        {events.map(event => (
+          <tr key={event.id} className="border-t border-gray-300">
+            <td className="py-2 px-4 text-center">
+              <input
+                type="radio"
+                name="selectedEvent"
+                value={event.id}
+                checked={selectedEventId === event.id}
+                onChange={() => setSelectedEventId(event.id)}
+                className="focus:ring-gray-500"
+              />
+            </td>
+            <td className="py-2 px-4 text-center">{event.id}</td>
+            <td className="py-2 px-4 text-center">{event.status === 'locked' ? 'locked' : 'unlocked'}</td>
+            <td className="py-2 px-4 text-center">{formatDate(event.timestamp)}</td>
           </tr>
-        </thead>
-        <tbody>
-          {events.map(event => (
-            <tr key={event.id} className="border-t border-gray-300">
-              <td className="py-2 px-4 text-center">
-                <input
-                  type="radio"
-                  name="selectedEvent"
-                  value={event.id}
-                  checked={selectedEventId === event.id}
-                  onChange={() => setSelectedEventId(event.id)}
-                  className="focus:ring-gray-500"
-                />
-              </td>
-              <td className="py-2 px-4 text-center">{event.id}</td>
-              <td className="py-2 px-4 text-center">{event.status === 'locked' ? 'locked' : 'unlocked'}</td>
-            </tr>
-          ))}
-        </tbody>
+        ))}
+      </tbody>
       </table>
       <div className="mt-4 flex space-x-4">
         <button onClick={handleLockEvent} disabled={!selectedEventId} className="bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800">Toggle Lock</button>
