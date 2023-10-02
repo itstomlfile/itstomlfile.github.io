@@ -43,6 +43,7 @@ const WorkQueueManagement: React.FC = () => {
       const newEvent: Omit<Event, 'id'> = {
         name: eventName,
         status: 'unlocked', // Default status for new events
+        timestamp: new Date().toISOString()  // Adding the timestamp
       };
       await WorkQueueManagementService.publish(newEvent);
       setEventName(''); // Clear the input after publishing
@@ -51,6 +52,7 @@ const WorkQueueManagement: React.FC = () => {
       console.error("Error publishing event:", error);
     }
   };
+  
 
   const formatDate = (timestamp: string) => {
     const date = new Date(timestamp);
