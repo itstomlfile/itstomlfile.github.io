@@ -99,25 +99,31 @@ const WorkQueueManagement: React.FC = () => {
         </tr>
       </thead>
       <tbody>
-        {events.map(event => (
-          <tr key={event.id} className="border-t border-gray-300">
-            <td className="py-2 px-4 text-center">
-              <input
-                type="radio"
-                name="selectedEvent"
-                value={event.id}
-                checked={selectedEventId === event.id}
-                onChange={() => setSelectedEventId(event.id)}
-                className="focus:ring-gray-500"
-              />
-            </td>
-            <td className="py-2 px-4 text-center">{event.id}</td>
-            <td className="py-2 px-4 text-center">{event.status === 'locked' ? 'locked' : 'unlocked'}</td>
-            <td className="py-2 px-4 text-center">{formatDate(event.timestamp)}</td>
+        {events.length === 0 ? (
+          <tr>
+            <td colSpan={4} className="py-2 px-4 text-center text-gray-700">No events.</td>
           </tr>
-        ))}
+        ) : (
+          events.map(event => (
+            <tr key={event.id} className="border-t border-gray-300">
+              <td className="py-2 px-4 text-center">
+                <input
+                  type="radio"
+                  name="selectedEvent"
+                  value={event.id}
+                  checked={selectedEventId === event.id}
+                  onChange={() => setSelectedEventId(event.id)}
+                  className="focus:ring-gray-500"
+                />
+              </td>
+              <td className="py-2 px-4 text-center">{event.id}</td>
+              <td className="py-2 px-4 text-center">{event.status === 'locked' ? 'locked' : 'unlocked'}</td>
+              <td className="py-2 px-4 text-center">{formatDate(event.timestamp)}</td>
+            </tr>
+          ))
+        )}
       </tbody>
-      </table>
+    </table>
       <div className="mt-4 flex space-x-4">
         <button onClick={handleLockEvent} disabled={!selectedEventId} className="bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800">Toggle Lock</button>
       </div>
