@@ -14,7 +14,7 @@ const Header: React.FC = () => {
           </NavLink>
         </div>
         <nav>
-          <ul className="flex space-x-4">
+          <ul className="flex space-x-4 mb-auto">
             <li>
               <NavLink to="/about" className={`hover:text-gray-400 transition ease-in-out duration-200 ${aboutMatch ? 'text-gray-400' : ''}`}>
                 About

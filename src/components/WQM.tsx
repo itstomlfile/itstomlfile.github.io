@@ -73,7 +73,7 @@ const WorkQueueManagement: React.FC = () => {
 
   return (
     <div className="bg-gray-200 p-8 rounded-md shadow-md">
-      <div className="mb-4">
+      <div className="mb-8">
         <label htmlFor="eventName" className="block text-gray-700">Event Name:</label>
         <input 
           type="text" 
@@ -82,12 +82,14 @@ const WorkQueueManagement: React.FC = () => {
           onChange={(e) => setEventName(e.target.value)} 
           className="mt-1 border rounded-md px-2 py-1 w-full"
         />
-        <button 
-          onClick={handlePublishEvent} 
-          className="mt-2 bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-700"
-        >
-          Publish New Event
-        </button>
+        <div className="mt-4 flex space-x-4 justify-center">
+          <button 
+            onClick={handlePublishEvent} 
+            className="mt-2 bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800"
+          >
+            Publish New Event
+          </button>
+        </div>
       </div>
       <table className="min-w-full bg-white rounded-md shadow-md overflow-hidden">
       <thead className="bg-gray-900 text-white">
@@ -124,8 +126,8 @@ const WorkQueueManagement: React.FC = () => {
         )}
       </tbody>
     </table>
-      <div className="mt-4 flex space-x-4">
-        <button onClick={handleLockEvent} disabled={!selectedEventId} className="bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800">Toggle Lock</button>
+      <div className="mt-4 flex space-x-4 justify-center">
+        <button onClick={handleLockEvent} disabled={!selectedEventId} className="bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800">Lock Selected Event</button>
       </div>
     </div>
   );
