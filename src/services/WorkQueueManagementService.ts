@@ -34,6 +34,21 @@ class WorkQueueManagementService {
     return this.request(`${this.BASE_URL}/get?event-id=${eventId}`);
   }
 
+  static async editEvent(eventId: string, payload: any): Promise<any> {
+    return this.request(`${this.BASE_URL}/update`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ eventId, ...payload })
+    });
+  }
+
+  static async deleteEvent(eventId: string): Promise<any> {
+    return this.request(`${this.BASE_URL}/delete`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ eventId })
+    });
+  }
 
   private static async request(url: string, options: RequestInit = {}): Promise<any> {
     try {

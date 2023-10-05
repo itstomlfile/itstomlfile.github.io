@@ -52,6 +52,32 @@ const WorkQueueManagement: React.FC = () => {
       console.error("Error publishing event:", error);
     }
   };
+
+  const handleEditEvent = async (name: string) => {
+    if (selectedEventId) {
+      try {
+        const updatedEvent = {
+          name
+        };
+        await WorkQueueManagementService.editEvent(selectedEventId, updatedEvent);
+        fetchEvents();
+      } catch (error) {
+        console.error("Error editing event:", error);
+      }
+    }
+  };
+  
+  const handleDeleteEvent = async () => {
+    if (selectedEventId) {
+      try {
+        await WorkQueueManagementService.deleteEvent(selectedEventId);
+        setSelectedEventId(null);
+        fetchEvents();
+      } catch (error) {
+        console.error("Error deleting event:", error);
+      }
+    }
+  };
   
 
   const formatDate = (timestamp: string) => {
@@ -128,6 +154,8 @@ const WorkQueueManagement: React.FC = () => {
     </table>
       <div className="mt-4 flex space-x-4 justify-center">
         <button onClick={handleLockEvent} disabled={!selectedEventId} className="bg-gray-700 text-white py-2 px-4 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800">Lock Selected Event</button>
+        <button onClick={() => handleEditEvent(eventName)} disabled={!selectedEventId} className="bg-blue-700 text-white py-2 px-4 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-800">Edit Selected Event</button>
+        <button onClick={handleDeleteEvent} disabled={!selectedEventId} className="bg-red-700 text-white py-2 px-4 rounded-md hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-800">Delete Selected Event</button>
       </div>
     </div>
   );
